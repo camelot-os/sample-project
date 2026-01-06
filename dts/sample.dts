@@ -17,7 +17,7 @@
 
     reserved-memory {
         tasks_code: memory@0800d000 {
-               reg = <0x0800a000 0x200000>;
+               reg = <0x0800d000 0x200000>;
                compatible = "sentry,memory-pool";
         };
         tasks_ram: memory@20008000 {
