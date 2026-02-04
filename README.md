@@ -78,15 +78,15 @@ A sample (other exist depending on the intergrator wish of tools usage), can be:
 $ pip install pyocd
 $ pyocd pack update
 [...]
-$ pyocd pack install stm32u5a5
-Downloading packs (press Control-C to cancel):
-    Keil.STM32U5xx_DFP.3.0.0
 Downloading descriptors (001/001)
 $ pyocd list
   #   Probe/Board       Unique ID                  Target            
 ---------------------------------------------------------------------
   0   STLINK-V3         004300483232510239353236   ✖︎ stm32u5a5zjtxq  
       NUCLEO-U5A5ZJ-Q
+$ pyocd pack install stm32u5a5zjtxq
+Downloading packs (press Control-C to cancel):
+    Keil.STM32U5xx_DFP.3.0.0
 ```
 
 Now that pyocd does found the board and its id, it can be started as a gdbserver agent, which localy listen on tcp/3333
@@ -115,6 +115,32 @@ Once the serial client is connected, usually on ttyACM0 when using nucleo board,
 The firmware serial output is then accessible, using 115200/8n1 usual serial port configuration.
 Note that the firmware use unix return mode, meaning that the serial client has to emulate the carriage return. Such a setting is a standard configuration of usual serial clients.
 
+
+The expected output is the following:
+
+
+```
+hello this is idle!
+yielding for scheduler...
+Sending message: Short msg
+IPC received, calculating SHA256
+SHA256: 0x7c3f950bfee666ebc2db4fb114a0b2b3fbada2310c99396a1a2a276df0c946ef
+Sending message: This is a bit longer message
+IPC received, calculating SHA256
+SHA256: 0xad6400bb3ae05c354263ddd15535645cce1979d037180d5dce08f9fe641d9716
+Sending message: yet another message to send via IPC
+IPC received, calculating SHA256
+SHA256: 0xaeb53aa119c5c4297f0d0bf3d60b23b2849c1b0064336ffb0522c45433f7ff28
+Sending message: Tiny
+IPC received, calculating SHA256
+SHA256: 0x63b9415f88cad4d6cc7bbc8cb74652e598b5e9376623fa313cde5bb2d48716ac
+Sending message: Medium length message for testing
+IPC received, calculating SHA256
+SHA256: 0x44c5788ec1b8b47e02ba0dc6a542efb5e35c64611db7d2f48ec6d9d5d40c1750
+Sending message: another basic medium message to send
+IPC received, calculating SHA256
+SHA256: 0x40c50b0b73225288da676ad70f601f3d2a45ba148c57c425aa866976343b1c41
+```
 
 
 ## About project configuration file
