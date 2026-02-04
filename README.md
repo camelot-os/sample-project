@@ -79,7 +79,6 @@ $ pip install pyocd
 $ pyocd pack update
 [...]
 $ pyocd pack install stm32u5a5
-pyocd pack install stm32u5a5
 Downloading packs (press Control-C to cancel):
     Keil.STM32U5xx_DFP.3.0.0
 Downloading descriptors (001/001)
