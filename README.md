@@ -70,6 +70,54 @@ ninja
 
 The firmware is then generated in `output/build/firmware.hex` file and can be flashed immediately.
 
+A sample (other exist depending on the intergrator wish of tools usage), can be:
+
+#### Get back pyocd and gdb-multiarch
+
+```
+$ pip install pyocd
+$ pyocd pack update
+[...]
+$ pyocd pack install stm32u5a5
+pyocd pack install stm32u5a5
+Downloading packs (press Control-C to cancel):
+    Keil.STM32U5xx_DFP.3.0.0
+Downloading descriptors (001/001)
+$ pyocd list
+  #   Probe/Board       Unique ID                  Target            
+---------------------------------------------------------------------
+  0   STLINK-V3         004300483232510239353236   ✖︎ stm32u5a5zjtxq  
+      NUCLEO-U5A5ZJ-Q
+```
+
+Now that pyocd does found the board and its id, it can be started as a gdbserver agent, which localy listen on tcp/3333
+
+```
+pyocd gdbserver
+```
+
+Once started, any arm-compatible gdb such as gdb-multiarch package of usual distro can be used, at the project root directory:
+
+```
+gdb-multiarch
+```
+
+In gdb, the following command sequence can be used:
+
+```
+set arch arm
+target remote localhost:3333
+monitor reset halt
+exec-file output/build/firmware.hex
+load
+```
+
+Once the serial client is connected, usually on ttyACM0 when using nucleo board, the `continue` command can be lauched so that the board bootup.
+The firmware serial output is then accessible, using 115200/8n1 usual serial port configuration.
+Note that the firmware use unix return mode, meaning that the serial client has to emulate the carriage return. Such a setting is a standard configuration of usual serial clients.
+
+
+
 ## About project configuration file
 
 The project configuration file is a TOML file that describes all required content that allows to produce a firmware for a given hardware target.
