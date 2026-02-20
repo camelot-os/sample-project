@@ -7,7 +7,7 @@ version = 'v0.0.1'
 
 [kernel]
 scm.git.uri = 'https://github.com/camelot-os/sentry-kernel.git'
-scm.git.revision = 'main'
+scm.git.revision = 'v0.4.6'
 config = 'configs/sentry/nucleo_u5a5.config'
 
 [runtime]
